@@ -1,38 +1,71 @@
 {
-  "name": "lafayette-covid-tracker",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "lafayette-covid-tracker",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3",
+        "web-vitals": "^1.0.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint:raw": "eslint \"{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx,tsx}\"",
+        "lint": "yarn run lint:raw || true",
+        "pretty": "prettier --write \"{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx,tsx,json,md,yml,html}\"",
+        "fixcode": "yarn run lint:raw --fix && yarn run pretty && yarn run lint",
+        "prepare": "husky install"
+    },
+    "prettier": "@carimus/prettier-config",
+    "eslintConfig": {
+        "extends": "@carimus/eslint-config-react"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx}": [
+            "prettier --write",
+            "eslint"
+        ],
+        "{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{json,md,yml,html}": [
+            "prettier --write"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@carimus/eslint-config-react": "^1.3.0",
+        "@carimus/prettier-config": "^1.1.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-babel": "^5.3.1",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-jest": "^24.4.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.1.0",
+        "eslint-plugin-react": "^7.25.1",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-standard": "^5.0.0",
+        "husky": "^7.0.2",
+        "lint-staged": "^11.1.2",
+        "prettier": "^2.4.0"
+    }
 }
