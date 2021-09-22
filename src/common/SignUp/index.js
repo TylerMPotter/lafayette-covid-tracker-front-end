@@ -10,7 +10,10 @@ const SignUp = ({ classes }) => {
     return (
         <div className={classes.root}>
             <Typography>Sign Up Below</Typography>
-            {/* TODO add sign up form here @Tyler */}
+            {/* TODO add sign up form here @Tyler
+             * you can use the <Textfield/> component and a state hook to track the email
+             * https://mui.com/components/text-fields/
+             */}
             <Button onClick={registerUser}>Dummy Button</Button>
         </div>
     );
