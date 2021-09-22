@@ -1,20 +1,21 @@
 import React from 'react';
 import './App.css';
-import { MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
-import ExampleComponent from './common/ExampleComponent';
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 import { firebaseConfig } from './firebase/firebaseConfig';
+import MainRouter from './router';
+import { createBrowserHistory } from 'history';
 
-const app = initializeApp(firebaseConfig);
-getAnalytics(app);
+initializeApp(firebaseConfig);
+
+const history = createBrowserHistory();
 
 function App() {
     return (
-        <MuiThemeProvider theme={theme}>
-            <ExampleComponent />
-        </MuiThemeProvider>
+        <ThemeProvider theme={theme}>
+            <MainRouter history={history} />
+        </ThemeProvider>
     );
 }
 

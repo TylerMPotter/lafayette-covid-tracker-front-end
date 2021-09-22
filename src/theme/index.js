@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
 const white = '#ffffff';
 const black = 'rgba(0, 0, 0, 0.9)';
