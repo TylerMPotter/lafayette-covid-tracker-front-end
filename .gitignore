@@ -30,3 +30,5 @@ functions/firestore-debug.log
 functions/ui-debug.log
 ui-debug.log
 firestore-debug.log
+*.cache
+.firebase/hosting.YnVpbGQ.cache
