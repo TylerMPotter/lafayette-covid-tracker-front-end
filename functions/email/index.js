@@ -1,15 +1,7 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config({ path: '../../.env.local' })
+require('dotenv').config({ path: '../../.env.local' });
 
-const sendEmail = (
-    transporter,
-    to,
-    from,
-    replyTo,
-    subject,
-    body,
-) => {
-
+const sendEmail = (transporter, to, from, replyTo, subject, body) => {
     const mailOptions = {
         from: from,
         to: to,
@@ -25,8 +17,7 @@ const sendEmail = (
             console.log('Email sent: ' + info.response);
         }
     });
-
-}
+};
 
 const createTransporter = () => {
     return nodemailer.createTransport({
@@ -36,9 +27,9 @@ const createTransporter = () => {
             pass: process.env.EMAIL_PASSWORD,
         },
     });
-}
+};
 
 module.exports = {
     sendEmail,
     createTransporter,
-}
+};

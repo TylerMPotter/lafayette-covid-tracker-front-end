@@ -1,14 +1,14 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const {createTransporter, sendEmail} = require("./email");
-const { WELCOME_EMAIL } = require("./email/constants");
+const { createTransporter, sendEmail } = require('./email');
+const { WELCOME_EMAIL } = require('./email/constants');
 
 admin.initializeApp({
     // credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://lafayette-covid-tracker.web.app/',
 });
 const FIRESTORE = admin.firestore();
-const transporter = createTransporter()
+const transporter = createTransporter();
 
 const fs = require('fs');
 const dotenv = require('dotenv');
@@ -34,14 +34,14 @@ exports.createUser = functions.firestore
     .document('users/{userId}')
     .onCreate(async (snap, context) => {
         const email = snap.data()['email'];
-        sendEmail(transporter,
+        sendEmail(
+            transporter,
             email,
             WELCOME_EMAIL.from,
             WELCOME_EMAIL.replyTo,
             WELCOME_EMAIL.subject,
-            WELCOME_EMAIL.body
+            WELCOME_EMAIL.body,
         );
-
     });
 
 /**
@@ -59,12 +59,13 @@ exports.scheduledFunction = functions.pubsub
         if (data === 39) {
             getEmailList().then((userEmails) => {
                 userEmails.forEach((email) => {
-                    sendEmail(transporter,
+                    sendEmail(
+                        transporter,
                         email,
                         WELCOME_EMAIL.from,
                         WELCOME_EMAIL.replyTo,
                         WELCOME_EMAIL.subject,
-                        WELCOME_EMAIL.body
+                        WELCOME_EMAIL.body,
                     );
                 });
             });

@@ -3,8 +3,8 @@ const WELCOME_EMAIL = {
     replyTo: 'Jacob Potter <potterjd@lafayette.edu>',
     subject: 'Welcome to the Covid Tracker',
     body: "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Unsubscribe Here</a>",
-}
+};
 
 module.exports = {
     WELCOME_EMAIL,
-}
+};
