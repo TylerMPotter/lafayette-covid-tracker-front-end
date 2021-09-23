@@ -6,15 +6,22 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebase/firebaseConfig';
 import MainRouter from './router';
 import { createBrowserHistory } from 'history';
+import { getFirestore } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
+
+const db = getFirestore();
+
+export const FirestoreContext = React.createContext(null);
 
 const history = createBrowserHistory();
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <MainRouter history={history} />
+            <FirestoreContext.Provider value={db}>
+                <MainRouter history={history} />
+            </FirestoreContext.Provider>
         </ThemeProvider>
     );
 }

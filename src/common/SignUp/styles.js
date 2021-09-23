@@ -1,6 +1,15 @@
 const styles = (theme) => ({
     root: {
-        paddingLeft: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+    },
+    errorMessage: {
+        color: theme.palette.error.main,
+    },
+    title: {
+        textAlign: 'center',
     },
 });
 

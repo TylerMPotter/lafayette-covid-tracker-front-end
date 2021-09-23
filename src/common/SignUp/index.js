@@ -1,20 +1,49 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './styles';
 import { withStyles } from '@mui/styles';
-import { Button, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
+import { FirestoreContext } from '../../App';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 const SignUp = ({ classes }) => {
-    const registerUser = () => {
-        // TODO save users email in firestore
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+
+    const db = useContext(FirestoreContext);
+    const registerUser = async () => {
+        let exists = false;
+        const querySnapshot = await getDocs(collection(db, 'users'));
+        await querySnapshot.forEach((doc) => {
+            if (doc.data().email.toLowerCase() === email.toLowerCase()) {
+                exists = true;
+            }
+        });
+        if (!exists) {
+            try {
+                await addDoc(collection(db, 'users'), {
+                    id: email,
+                    email: email,
+                });
+                setEmail('');
+                setError('');
+            } catch (e) {
+                setError('An unknown error has occured: ' + e);
+            }
+        } else {
+            setError('User already exists');
+        }
     };
     return (
         <div className={classes.root}>
-            <Typography>Sign Up Below</Typography>
-            {/* TODO add sign up form here @Tyler
-             * you can use the <Textfield/> component and a state hook to track the email
-             * https://mui.com/components/text-fields/
-             */}
+            <Typography className={classes.title}>Sign Up Below</Typography>
+            <TextField
+                placeholder="Enter an email..."
+                onChange={(event) => {
+                    setEmail(event.target.value);
+                }}
+            />
             <Button onClick={registerUser}>Dummy Button</Button>
+            <Typography className={classes.errorMessage}>{error}</Typography>
         </div>
     );
 };

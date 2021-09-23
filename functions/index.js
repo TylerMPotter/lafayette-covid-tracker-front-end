@@ -23,8 +23,6 @@ if (fs.existsSync('.env.local')) {
     }
 }
 
-console.log(process.env);
-
 /**
  * Listens to the firestore for when a user is created from our front end
  * and sends a welcome email to the users email
@@ -52,10 +50,8 @@ exports.createUser = functions.firestore
 exports.scheduledFunction = functions.pubsub
     .schedule('every 5 minutes')
     .onRun((context) => {
-        console.log('This will be run every 5 minutes!');
-
+        console.log('Scraping the web');
         const data = 40;
-
         if (data === 39) {
             getEmailList().then((userEmails) => {
                 userEmails.forEach((email) => {

@@ -9,9 +9,9 @@ const palette = {
     background: white,
     foreground: black,
     primary: {
-        main: '#1976d2',
-        carimusPurple: '#1b1542',
-        carimusMint: '#bbda80',
+        main: '#910029',
+        secondary: '#1E1E1E',
+        contrastText: '#ffffff',
     },
     primaryForeground: white,
     danger: { main: '#f44336' },
