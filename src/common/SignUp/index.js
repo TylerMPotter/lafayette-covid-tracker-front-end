@@ -77,6 +77,7 @@ const SignUp = ({ classes }) => {
         <div className={classes.root}>
             <Typography className={classes.title}>Sign Up Below</Typography>
             <TextField
+                value={email}
                 placeholder="Enter an email..."
                 onChange={(event) => {
                     setEmail(event.target.value);
