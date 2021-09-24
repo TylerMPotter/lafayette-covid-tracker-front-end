@@ -28,6 +28,7 @@ const palette = {
 
 const typography = {
     fontFamily: [
+        'Whitney SSm A',
         'Varela Round',
         'Helvetica Neue',
         'Helvetica',

@@ -1,3 +1,4 @@
+/* eslint-disable no-undefined */
 import React, { useContext, useState } from 'react';
 import styles from './styles';
 import { withStyles } from '@mui/styles';
@@ -5,10 +6,11 @@ import { Button, TextField, Typography } from '@mui/material';
 import { FirestoreContext } from '../../App';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { EMAIL_REGEX } from './constants';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = ({ classes }) => {
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
 
     const db = useContext(FirestoreContext);
     const registerUser = async () => {
@@ -27,15 +29,47 @@ const SignUp = ({ classes }) => {
                     email: email,
                 });
                 setEmail('');
-                setError('');
+                toast.success('Successfully Registered!', {
+                    position: 'bottom-left',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             } catch (e) {
-                setError('An unknown error has occurred: ' + e);
+                toast.error('An error has occurred' + e, {
+                    position: 'bottom-left',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         } else {
             if (invalidEmail) {
-                setError('Email Address is Invalid');
+                toast.error('Email Address is Invalid', {
+                    position: 'bottom-left',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             } else {
-                setError('User already exists');
+                toast.error('This Email Address is Already Subscribed', {
+                    position: 'bottom-left',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         }
     };
@@ -48,8 +82,10 @@ const SignUp = ({ classes }) => {
                     setEmail(event.target.value);
                 }}
             />
-            <Button onClick={registerUser}>Dummy Button</Button>
-            <Typography className={classes.errorMessage}>{error}</Typography>
+            <Button className={classes.subscribeButton} onClick={registerUser}>
+                Subscribe
+            </Button>
+            <ToastContainer />
         </div>
     );
 };

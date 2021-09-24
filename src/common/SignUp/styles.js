@@ -11,6 +11,10 @@ const styles = (theme) => ({
     title: {
         textAlign: 'center',
     },
+    subscribeButton: {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.info.main,
+    },
 });
 
 export default styles;
