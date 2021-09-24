@@ -4,6 +4,7 @@ import { withStyles } from '@mui/styles';
 import { Button, TextField, Typography } from '@mui/material';
 import { FirestoreContext } from '../../App';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { EMAIL_REGEX } from './constants';
 
 const SignUp = ({ classes }) => {
     const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const SignUp = ({ classes }) => {
 
     const db = useContext(FirestoreContext);
     const registerUser = async () => {
+        const invalidEmail = email.match(EMAIL_REGEX) === null;
         let exists = false;
         const querySnapshot = await getDocs(collection(db, 'users'));
         await querySnapshot.forEach((doc) => {
@@ -18,7 +20,7 @@ const SignUp = ({ classes }) => {
                 exists = true;
             }
         });
-        if (!exists) {
+        if (!exists && !invalidEmail) {
             try {
                 await addDoc(collection(db, 'users'), {
                     id: email,
@@ -27,10 +29,14 @@ const SignUp = ({ classes }) => {
                 setEmail('');
                 setError('');
             } catch (e) {
-                setError('An unknown error has occured: ' + e);
+                setError('An unknown error has occurred: ' + e);
             }
         } else {
-            setError('User already exists');
+            if (invalidEmail) {
+                setError('Email Address is Invalid');
+            } else {
+                setError('User already exists');
+            }
         }
     };
     return (
