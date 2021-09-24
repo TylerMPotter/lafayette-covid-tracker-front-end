@@ -10,22 +10,26 @@ const Navbar = ({ classes }) => {
 
     return (
         <Grid className={classes.root}>
-            <Grid item>
+            <Grid item className={classes.navbarButtonWrapper}>
                 <Paper
+                    className={classes.navbarButton}
                     onClick={() => {
                         history.push(ROUTE_HOME);
                     }}
                 >
-                    <Typography>Home</Typography>
+                    <Typography className={classes.navbarText}>Home</Typography>
                 </Paper>
             </Grid>
-            <Grid item>
+            <Grid item className={classes.navbarButtonWrapper}>
                 <Paper
+                    className={classes.navbarButton}
                     onClick={() => {
                         history.push(ROUTE_SIGNUP);
                     }}
                 >
-                    <Typography>Sign Up</Typography>
+                    <Typography className={classes.navbarText}>
+                        Sign Up
+                    </Typography>
                 </Paper>
             </Grid>
         </Grid>

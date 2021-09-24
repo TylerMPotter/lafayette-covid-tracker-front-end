@@ -10,6 +10,7 @@ const palette = {
     foreground: black,
     primary: {
         main: '#910029',
+        mainDark: '#800126',
         secondary: '#1E1E1E',
         contrastText: '#ffffff',
     },
